@@ -74,7 +74,7 @@ button:hover {
 <body>
 
 <audio id="bgMusic" loop>
-  <source src="Panaginip.mp3" type="audio/mp3">
+  <source src="assets/Panaginip.mp3" type="audio/mp3">
 </audio>
 
 <!-- COVER -->
@@ -241,12 +241,24 @@ function yesAnswer() {
   `;
 }
 </script>
+
 <script>
 function startExperience() {
-  document.getElementById('coverPage').style.display = 'none';
-  document.getElementById('bgMusic').play();
-}
+  const music = document.getElementById('bgMusic');
 
+  document.getElementById('coverPage').style.display = 'none';
+
+  music.volume = 0.7;
+
+  const playPromise = music.play();
+
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      alert("Tap anywhere to enable music 🎵");
+    });
+  }
+}
+</script>
 function showQuiz() {
   document.getElementById('messageBox').classList.add('hidden');
   document.getElementById('quizSection').classList.remove('hidden');
