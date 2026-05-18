@@ -18,7 +18,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
   background: linear-gradient(135deg, #ffb6d9, #ffd6ea, #ffc0cb);
   position: relative;
 }
@@ -37,12 +37,12 @@ body {
 }
 
 .card {
-  width: 90%;
+  width: 92%;
   max-width: 850px;
   background: rgba(255,255,255,0.35);
   backdrop-filter: blur(18px);
   border-radius: 35px;
-  padding: 50px;
+  padding: clamp(20px, 5vw, 50px);
   text-align: center;
   box-shadow: 0 0 40px rgba(255, 105, 180, 0.35);
   position: relative;
