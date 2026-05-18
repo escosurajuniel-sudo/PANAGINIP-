@@ -1,119 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>In Case You Ever Wondered 💛</title>
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #ffe6eb, #fdf3ff);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      flex-direction: column;
-      color: #333;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hey Princess 🤍</title>
 
-    .container {
-      background: #fff;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      max-width: 600px;
-      width: 90%;
-      transition: 0.3s ease-in-out;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
-    button {
-      background: #ff8fab;
-      border: none;
-      color: white;
-      padding: 12px 25px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 20px;
-    }
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffb6d9, #ffd6ea, #ffc0cb);
+  position: relative;
+}
 
-    button:hover {
-      background: #ff6b95;
-    }
+.hearts span {
+  position: absolute;
+  font-size: 24px;
+  animation: float 6s linear infinite;
+  opacity: 0.8;
+}
 
-    .hidden {
-      display: none;
-    }
+@keyframes float {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+}
 
-    h2 {
-      color: #ff6b95;
-    }
+.card {
+  width: 90%;
+  max-width: 850px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(18px);
+  border-radius: 35px;
+  padding: 50px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 105, 180, 0.35);
+  position: relative;
+  z-index: 2;
+}
 
-    p {
-      font-size: 16px;
-      line-height: 1.5;
-    }
+button {
+  padding: 15px 40px;
+  border: none;
+  border-radius: 50px;
+  background: #ff4f9a;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
 
-    audio {
-      display: none;
-    }
-  </style>
+button:hover {
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+</style>
 </head>
+
 <body>
-  <div class="container" id="intro">
-    <h2>Hey Yen 💛</h2>
-    <p>I have a few questions for you... just click the button below.</p>
-    <button id="startBtn">Start 💬</button>
+
+<audio id="bgMusic" loop>
+  <source src="panaginip.mp3" type="audio/mp3">
+</audio>
+
+<!-- COVER -->
+<div id="coverPage" style="position:fixed; inset:0; background:linear-gradient(135deg,#ff9acb,#ffd6ea,#ffc0cb); display:flex; justify-content:center; align-items:center; flex-direction:column; z-index:9999;">
+  <h1 style="color:#ff3b8d; font-size:60px;">For My Princess 🤍</h1>
+  <p style="margin:20px; text-align:center;">I made something special for you 🥺💖</p>
+  <button onclick="startExperience()">Start 🤍</button>
+</div>
+
+<!-- HEARTS -->
+<div class="hearts" id="heartsContainer"></div>
+</div>
+
+<!-- MAIN CARD -->
+<div class="card">
+
+<!-- MESSAGE -->
+<div id="messageBox">
+  <h2 style="color:#ff3b8d;">Before Anything Else... 🤍</h2>
+
+<div style="text-align:center; line-height:1.9; font-size:18px; color:#7a2956; padding:10px 20px;">
+
+  <p style="margin-bottom:18px;">
+    I don’t even know where to start because there are so many things I want to tell you. Ever since you came into my life, everything started to feel softer, happier, and more meaningful.
+  </p>
+
+  <p style="margin-bottom:18px;">
+    You became one of the best parts of my day without even trying. Your messages, your laugh, your little reactions, even the way you get annoyed at me sometimes, all of those became something I look forward to every single day.
+  </p>
+
+  <p style="margin-bottom:18px;">
+    I know life hasn’t always been easy for you, and I know there are days when you’re tired, overwhelmed, and carrying so much in your heart. But despite all of that, you still continue to smile, continue to fight, and continue to be strong. And honestly? That’s one of the many reasons why I admire you so much.
+  </p>
+
+  <p style="margin-bottom:0;">
+    I may not be perfect, but if there’s one thing I’m sure about, it’s that my feelings for you are genuine. I want to be someone who stays beside you, comforts you on hard days, celebrates your achievements, listens to your random stories, and loves you in the most sincere way possible.
+  </p>
+
+</div>
+
+  <button onclick="showQuiz()">Next 🤍</button>
+</div>
+
+<!-- QUIZ -->
+<div id="quizSection" class="hidden">
+  <h2 style="color:#ff3b8d;">Before We Continue...</h2>
+
+  <p style="margin-top:15px;">
+    <h2>A Few Things I Need to Know</h2> 
+  </p>
+
+ <div style="text-align:left; margin-top:20px; line-height:1.8;">
+
+  <p>1. Do you feel comfortable and happy talking to me? 🤍</p>
+
+  <p>2. Do I make your days even a little better when we talk? 🥺</p>
+
+  <p>3. Can you see me as someone you can trust and rely on emotionally? 😌</p>
+
+  <p>4. Have I become someone special or important in your life? 💖</p>
+
+  <p>5. And honestly… do you see me as someone you would want in your future? 🌸</p>
+
+</div>
+
+  <button onclick="showFinal()">One Last Thing 💌</button>
+</div>
+
+<!-- FINAL -->
+<div id="finalBox" class="hidden">
+  <div style="margin-top:30px; text-align:center;">
+    
+    <h2 style="color:#ff3b8d; font-size:40px;">
+      Will You Be My Girl? 💖
+    </h2>
+
+    <div style="margin-top:25px; display:flex; justify-content:center; gap:15px; flex-wrap:wrap;">
+      
+    <button onclick="yesAnswer()"
+  style="background:#ff4f9a; color:white;">
+  Yes Baby 🤍
+</button>
+
+     <button id="noBtn"
+  onmouseover="runAway()"
+  onclick="runAway()"
+  style="background:white; color:#ff3b8d; border:2px solid #ff4f9a; position:relative;">
+  No 😢
+</button>
+
+    </div>
+
   </div>
+</div>
 
-  <div class="container hidden" id="questions">
-    <h2>Just a Few Questions 💭</h2>
-    <ol style="text-align: left;">
-      <li>Do you believe timing matters in relationships?</li>
-      <li>Are you the type who waits for the right person or the right moment?</li>
-      <li>What kind of effort means the most to you words, time, or actions?</li>
-      <li>If someone liked you, would you give them a chance to prove themselves?</li>
-      <li>Do you think love can start with a simple connection or vibe?</li>
-    </ol>
-    <button onclick="showConfession()">Next ❤️</button>
-  </div>
+<script>
+function createHearts() {
+  const container = document.getElementById("heartsContainer");
+  const emojis = ["💖", "🌸", "🤍", "✨", "💗", "💘", "💞"];
 
-  <div class="container hidden" id="confession">
-    <h2>From Me to You 💌</h2>
-    <p>
-      After all those questions I asked, I just want to be real with you.<br><br>
-      Honestly I really enjoy talking to you. There’s something about you that makes everything feel lighter every time we talk. You have this calm but amazing vibe that I can’t really explain, yet it always makes my day better.<br><br>
-      To be honest, I’ve had a crush on you since the day we met. I don’t know what it is exactly, but I’ve never felt this kind of connection with anyone else before. What I feel for you is genuine and sincere. I’m not into playing games or saying things just to impress someone I’m saying this because I truly want you to know what’s in my heart.<br><br>
-      But please don’t feel pressured to answer right away. I just wanted to be honest about what I feel. Whatever your decision is, I’ll respect it completely. What matters most to me is that you know how much you mean to me, Yen. 💛
-    </p>
-  </div>
+  for (let i = 0; i < 40; i++) { // number of hearts
+    const span = document.createElement("span");
 
-  <!-- Hidden audio -->
-  <audio id="bgMusic" src="dangerously.mp3" preload="auto" loop></audio>
+    span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
 
-  <script>
-    const music = document.getElementById('bgMusic');
-    const startBtn = document.getElementById('startBtn');
+    span.style.left = Math.random() * 100 + "vw";
+    span.style.top = Math.random() * 100 + "vh";
+    span.style.fontSize = (15 + Math.random() * 25) + "px";
+    span.style.animationDuration = (3 + Math.random() * 5) + "s";
+    span.style.opacity = Math.random();
 
-    startBtn.addEventListener('click', () => {
-      // Play the background music when the user interacts
-      music.play().then(() => {
-        console.log("✅ Music started successfully!");
-      }).catch(err => {
-        console.warn("⚠️ Could not play audio automatically:", err);
-        alert("Click anywhere on the page to allow the music 🎵");
-      });
+    container.appendChild(span);
+  }
+}
 
-      document.getElementById('intro').classList.add('hidden');
-      document.getElementById('questions').classList.remove('hidden');
-    });
+createHearts();
+</script>
 
-    function showConfession() {
-      document.getElementById('questions').classList.add('hidden');
-      document.getElementById('confession').classList.remove('hidden');
-    }
-  </script>
+<script>
+function runAway() {
+  const btn = document.getElementById("noBtn");
+
+  const x = Math.random() * 300 - 100;
+  const y = Math.random() * 300 - 100;
+
+  btn.style.transform = `translate(${x}px, ${y}px)`;
+  btn.style.transition = "0.1s ease";
+}
+</script>
+<script>
+function yesAnswer() {
+  document.getElementById("finalBox").innerHTML = `
+<div style="margin-top:40px; text-align:center; animation: fadeIn 1s ease;">
+
+  <h2 style="color:#ff3b8d; font-size:45px;">
+    YAYYYY🤍 YOU CLICKED YES 😭💖
+  </h2>
+
+  <p style="font-size:20px; color:#7a2956; margin-top:20px; line-height:1.8;">
+    OMG WAIT REALLY?? 😳💖<br><br>
+
+    YOU ACTUALLY SAID YES?? I WAS NOT READY FOR THIS 😭<br><br>
+
+    WARNING: YOU CAN’T TAKE IT BACK NOW ❌😂<br>
+    I WILL NOW BE YOUR OFFICIAL BABY FOREVER 😌💍<br><br>
+
+    SYSTEM UPDATE: YOU ARE NOW STUCK WITH ME 🧠💘<br>
+    NO RETURNS. NO REFUNDS. NO EXCHANGE. 😤💖<br><br>
+
+    I WILL:  
+    <br>💌 spam you good morning  
+    <br>💌 annoy you daily  
+    <br>💌 overthink when you reply late  
+    <br>💌 love you loudly and aggressively 😭💖<br><br>
+
+    CONGRATS 🎉 YOU HAVE BEEN ADOPTED BY ME 😌🤍
+  </p>
+
+  <p style="margin-top:25px; font-size:18px; color:#ff4f9a;">
+    — Your Problem Now 😌💌
+  </p>
+
+</div>
+  `;
+}
+</script>
+<script>
+function startExperience() {
+  document.getElementById('coverPage').style.display = 'none';
+  document.getElementById('bgMusic').play();
+}
+
+function showQuiz() {
+  document.getElementById('messageBox').classList.add('hidden');
+  document.getElementById('quizSection').classList.remove('hidden');
+}
+
+function showFinal() {
+  document.getElementById('quizSection').classList.add('hidden');
+  document.getElementById('finalBox').classList.remove('hidden');
+}
+</script>
+
 </body>
 </html>
