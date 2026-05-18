@@ -241,24 +241,12 @@ function yesAnswer() {
   `;
 }
 </script>
-
 <script>
 function startExperience() {
-  const music = document.getElementById('bgMusic');
-
   document.getElementById('coverPage').style.display = 'none';
-
-  music.volume = 0.7;
-
-  const playPromise = music.play();
-
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {
-      alert("Tap anywhere to enable music 🎵");
-    });
-  }
+  document.getElementById('bgMusic').play();
 }
-</script>
+
 function showQuiz() {
   document.getElementById('messageBox').classList.add('hidden');
   document.getElementById('quizSection').classList.remove('hidden');
