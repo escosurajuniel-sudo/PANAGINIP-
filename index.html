@@ -73,6 +73,10 @@ button:hover {
 
 <body>
 
+<audio id="bgMusic" loop>
+  <source src="panaginip.mp3" type="audio/mp3">
+</audio>
+
 <!-- COVER -->
 <div id="coverPage" style="position:fixed; inset:0; background:linear-gradient(135deg,#ff9acb,#ffd6ea,#ffc0cb); display:flex; justify-content:center; align-items:center; flex-direction:column; z-index:9999;">
   <h1 style="color:#ff3b8d; font-size:60px;">For My Princess 🤍</h1>
@@ -166,21 +170,6 @@ button:hover {
   </div>
 </div>
 
-<!-- Hidden audio -->
-  <audio id="bgMusic" src="Panaginip.mp3" preload="auto" loop></audio>
-
-  <script>
-    const music = document.getElementById('bgMusic');
-    const startBtn = document.getElementById('startBtn');
-
-    startBtn.addEventListener('click', () => {
-      // Play the background music when the user interacts
-      music.play().then(() => {
-        console.log("✅ Music started successfully!");
-      }).catch(err => {
-        console.warn("⚠️ Could not play audio automatically:", err);
-        alert("Click anywhere on the page to allow the music 🎵");
-      });
 <script>
 function createHearts() {
   const container = document.getElementById("heartsContainer");
