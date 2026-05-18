@@ -23,6 +23,28 @@ body {
   position: relative;
 }
 
+.text-emoji {
+  position: absolute;
+  font-size: 18px;
+  animation: textPop 1.5s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes textPop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px) scale(1.2);
+    opacity: 0;
+  }
+}
+
 .hearts span {
   position: absolute;
   font-size: 24px;
@@ -119,27 +141,27 @@ button:hover {
 
 <div style="text-align:center; line-height:1.9; font-size:18px; color:#7a2956; padding:10px 20px;">
 
-<p style="margin-bottom:18px;">
+<p class="loveText" style="margin-bottom:18px;">
   Happy Birthday, my princess 🤍🎉 I don’t even know where to start because there are so many things I want to tell you today. Ever since you came into my life, everything started to feel softer, happier, and more meaningful but today feels even more special because it’s YOUR day.
 </p>
 
-<p style="margin-bottom:18px;">
+<p class="loveText" style="margin-bottom:18px;">
   You became one of the best parts of my day without even trying. Your messages, your laugh, your little reactions, even the way you get annoyed at me sometimes, all of those became something I look forward to every single day. And on your birthday, I just want to remind you how special you are to me.
 </p>
 
-<p style="margin-bottom:18px;">
+<p class="loveText" style="margin-bottom:18px;">
   I know life hasn’t always been easy for you, and I know there are days when you’re tired, overwhelmed, and carrying so much in your heart. But despite all of that, you still continue to smile, continue to fight, and continue to be strong. And honestly? That’s one of the many reasons why today I’m celebrating YOU even more.
 </p>
 
-<p style="margin-bottom:18px;">
+<p class="loveText" style="margin-bottom:18px;">
   I hope today brings you peace, happiness, and moments that make you smile for no reason. You deserve all the love in the world, not just today but every single day. If I could, I would take away all your stress and replace it with happiness and comfort.
 </p>
 
-<p style="margin-bottom:18px;">
+<p class="loveText" style="margin-bottom:18px;">
   I may not be perfect, but if there’s one thing I’m sure about, it’s that my feelings for you are genuine. I want to be someone who stays beside you, comforts you on hard days, celebrates your achievements, listens to your random stories, and loves you in the most sincere way possible.
 </p>
 
-<p style="margin-bottom:0;">
+<p class="loveText" style="margin-bottom:18px;">
   So today… Happy Birthday again, my princess 🤍🎂  
   Thank you for existing. Thank you for being you.  
   And I hope this year gives you everything your heart has been wishing for.
@@ -203,26 +225,37 @@ button:hover {
 </div>
 
 <script>
-function createHearts() {
-  const container = document.getElementById("heartsContainer");
-  const emojis = ["💖", "🌸", "🤍", "✨", "💗", "💘", "💞"];
+const emojis = ["💖","✨","🤍","🎉","💗","🥺","🌸","💞","🎂"];
 
-  for (let i = 0; i < 40; i++) { // number of hearts
-    const span = document.createElement("span");
+function popNearText(element) {
+  const rect = element.getBoundingClientRect();
 
-    span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+  const emoji = document.createElement("div");
+  emoji.className = "text-emoji";
+  emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
 
-    span.style.left = Math.random() * 100 + "vw";
-    span.style.top = Math.random() * 100 + "vh";
-    span.style.fontSize = (15 + Math.random() * 25) + "px";
-    span.style.animationDuration = (3 + Math.random() * 5) + "s";
-    span.style.opacity = Math.random();
+  // position near the paragraph
+  emoji.style.left = (rect.left + Math.random() * rect.width) + "px";
+  emoji.style.top = (rect.top + window.scrollY + 10) + "px";
 
-    container.appendChild(span);
-  }
+  document.body.appendChild(emoji);
+
+  setTimeout(() => emoji.remove(), 1500);
 }
 
-createHearts();
+// trigger when user scrolls OR reads
+const texts = document.querySelectorAll(".loveText");
+
+function triggerEmojis() {
+  texts.forEach((t, i) => {
+    setTimeout(() => popNearText(t), i * 300);
+  });
+}
+
+// start effect when message appears
+window.addEventListener("load", () => {
+  setTimeout(triggerEmojis, 2000);
+});
 </script>
 
 <script>
