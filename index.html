@@ -25,22 +25,25 @@ body {
 
 .text-emoji {
   position: absolute;
-  font-size: 18px;
-  animation: textPop 1.5s ease-out forwards;
+  font-size: 22px;
   pointer-events: none;
-  z-index: 10;
+  animation: popFloat 1.8s ease forwards;
+  z-index: 9999;
 }
 
-@keyframes textPop {
+@keyframes popFloat {
   0% {
-    transform: scale(0.3);
+    transform: scale(0.3) translateY(0);
     opacity: 0;
   }
-  30% {
+
+  20% {
+    transform: scale(1.2) translateY(-10px);
     opacity: 1;
   }
+
   100% {
-    transform: translateY(-40px) scale(1.2);
+    transform: scale(0.8) translateY(-60px);
     opacity: 0;
   }
 }
@@ -56,30 +59,6 @@ body {
   0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
   50% { opacity: 1; }
   100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
-}
-
-.text-emoji {
-  position: absolute;
-  font-size: 20px;
-  animation: floatPop 1.8s ease-out forwards;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-@keyframes floatPop {
-  0% {
-    transform: translateY(0) scale(0.5);
-    opacity: 0;
-  }
-
-  30% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(-60px) scale(1.3);
-    opacity: 0;
-  }
 }
 
 .card {
@@ -253,17 +232,37 @@ const emojis = ["💖","✨","🤍","🎉","💗","🥺","🌸","💞","🎂"];
 
 let active = false;
 
-function spawnNearMessage() {
-  const messageBox = document.getElementById("messageBox");
-  const rect = messageBox.getBoundingClientRect();
+function spawnNearVisibleSection() {
+
+  // detect which section is currently visible
+  let target;
+
+  if (!document.getElementById("messageBox").classList.contains("hidden")) {
+    target = document.getElementById("messageBox");
+  } 
+  
+  else if (!document.getElementById("quizSection").classList.contains("hidden")) {
+    target = document.getElementById("quizSection");
+  } 
+  
+  else {
+    return;
+  }
+
+  const rect = target.getBoundingClientRect();
 
   const emoji = document.createElement("div");
   emoji.className = "text-emoji";
-  emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
 
-  // spawn inside message area only
-  emoji.style.left = (rect.left + Math.random() * rect.width) + "px";
-  emoji.style.top = (rect.top + window.scrollY + Math.random() * rect.height) + "px";
+  emoji.innerText =
+    emojis[Math.floor(Math.random() * emojis.length)];
+
+  // random position INSIDE visible section
+  emoji.style.left =
+    (rect.left + Math.random() * rect.width) + "px";
+
+  emoji.style.top =
+    (rect.top + window.scrollY + Math.random() * rect.height) + "px";
 
   document.body.appendChild(emoji);
 
@@ -272,14 +271,15 @@ function spawnNearMessage() {
   }, 1800);
 }
 
-// START continuous effect when message is shown
 function startEmojiEffect() {
+
   if (active) return;
+
   active = true;
 
   setInterval(() => {
-    spawnNearMessage();
-  }, 300); // speed of popping
+    spawnNearVisibleSection();
+  }, 250);
 }
 </script>
 
