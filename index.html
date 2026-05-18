@@ -227,35 +227,36 @@ button:hover {
 <script>
 const emojis = ["💖","✨","🤍","🎉","💗","🥺","🌸","💞","🎂"];
 
-function popNearText(element) {
-  const rect = element.getBoundingClientRect();
+let active = false;
+
+function spawnNearMessage() {
+  const messageBox = document.getElementById("messageBox");
+  const rect = messageBox.getBoundingClientRect();
 
   const emoji = document.createElement("div");
   emoji.className = "text-emoji";
   emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
 
-  // position near the paragraph
+  // spawn inside message area only
   emoji.style.left = (rect.left + Math.random() * rect.width) + "px";
-  emoji.style.top = (rect.top + window.scrollY + 10) + "px";
+  emoji.style.top = (rect.top + window.scrollY + Math.random() * rect.height) + "px";
 
   document.body.appendChild(emoji);
 
-  setTimeout(() => emoji.remove(), 1500);
+  setTimeout(() => {
+    emoji.remove();
+  }, 1800);
 }
 
-// trigger when user scrolls OR reads
-const texts = document.querySelectorAll(".loveText");
+// START continuous effect when message is shown
+function startEmojiEffect() {
+  if (active) return;
+  active = true;
 
-function triggerEmojis() {
-  texts.forEach((t, i) => {
-    setTimeout(() => popNearText(t), i * 300);
-  });
+  setInterval(() => {
+    spawnNearMessage();
+  }, 300); // speed of popping
 }
-
-// start effect when message appears
-window.addEventListener("load", () => {
-  setTimeout(triggerEmojis, 2000);
-});
 </script>
 
 <script>
@@ -310,6 +311,8 @@ function yesAnswer() {
 function startExperience() {
   document.getElementById('coverPage').style.display = 'none';
   document.getElementById('bgMusic').play();
+  
+  startEmojiEffect(); 
 }
 
 function showQuiz() {
